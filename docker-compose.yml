@@ -1,0 +1,49 @@
+version: '2'
+
+volumes:
+  openfire:
+  db:
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_PASSWORD=openfire
+      - MYSQL_DATABASE=openfire
+      - MYSQL_USER=openfire
+    networks:
+      - backend
+  app:
+    image: openfire
+    ports:
+      - 9090:9090
+      - 3478:3478
+      - 3479:3479
+      - 5222:5222
+      - 5223:5223
+      - 5229:5229
+      - 7070:7070
+      - 7443:7443
+      - 7777:7777
+    links:
+      - db
+    volumes:
+      - openfire:/var/www/html
+    restart: always
+    networks:
+      - frontend
+      - backend
+
+networks:
+  frontend:
+    external:
+    name: frontend
+
+  backend:
+    external:
+      name: backend
+
