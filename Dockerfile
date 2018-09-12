@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER tiago4859 <tiago4859@gmail.com>
+MAINTAINER daijinming <daijinming@live.cn>
 
 
 ENV OPENFIRE_VERSION=4.2.3 \
@@ -8,9 +8,9 @@ ENV OPENFIRE_VERSION=4.2.3 \
     OPENFIRE_LOG_DIR=/var/log/openfire
 
 RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y wget unzip vim ntpdate ntp openjdk-7-jre sudo \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y wget unzip vim ntpdate ntp openjdk-8-jre sudo \
  && echo "Downloading openfire_${OPENFIRE_VERSION}_all.deb ..." \
- && wget --no-verbose "http://download.igniterealtime.org/openfire/openfire_${OPENFIRE_VERSION}_all.deb" -O /tmp/openfire_${OPENFIRE_VERSION}_all.deb \
+ && wget --no-verbose "http://arc.elef.top/openfire/openfire_${OPENFIRE_VERSION}_all.deb" -O /tmp/openfire_${OPENFIRE_VERSION}_all.deb \
  && dpkg -i /tmp/openfire_${OPENFIRE_VERSION}_all.deb \
  && mv /var/lib/openfire/plugins/admin /usr/share/openfire/plugin-admin \
  && rm -rf openfire_${OPENFIRE_VERSION}_all.deb \
